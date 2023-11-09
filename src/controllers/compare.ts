@@ -17,6 +17,20 @@ export const compareController = async (req: Request, res: Response, next: NextF
         return next(e);
     }
 }
+export const compareControllerGET = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const productName = req.query.product;
+        if (!productName) {
+            throw { message: 'Please provide a product name' };
+        }
+        const products = await getCompareResponse(productName as string);
+        return res.status(200).json({
+            products
+        })
+    } catch (e) {
+        return next(e);
+    }
+}
 
 const getCompareResponse = async (productName: string) => {
     const token = generateKeywords(productName)[1];

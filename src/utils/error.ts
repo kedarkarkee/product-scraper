@@ -8,7 +8,7 @@ export const error404 = (req: Request, res: Response) => {
 }
 
 export const errorHandler = (err: any, req: Request, res: Response, next: NextFunction) => {
-
+    console.log(err);
     return res.status(500).json({
         error_message: err.message ?? 'Interval Server Error. Please try again later',
     });
